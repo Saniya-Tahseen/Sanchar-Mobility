@@ -1,0 +1,33 @@
+{
+  "name": "sancharsathi",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SancharSathi - Electrifying Every Mile | Smart Electric Scooter Rental & Mobility Platform",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "sancharsathi",
+    "electric-scooter",
+    "ev-mobility",
+    "model-viewer",
+    "green-energy"
+  ],
+  "author": "SancharSathi",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.11"
+  }
+}
