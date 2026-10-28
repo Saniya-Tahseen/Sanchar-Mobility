@@ -1,33 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
   };
 
   return (
-      <header className="nav-wrap">
-        <nav className="nav container" data-testid="site-navigation"><button className="brand" data-testid="brand-home" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="SancharSathi Home"><span
-              className="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                strokeLinejoin="round" className="lucide lucide-zap" aria-hidden="true">
-                <path
-                  d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
-                </path>
-              </svg></span>Sanchar<span>Sathi</span></button>
-          <div className="nav-links "><button data-testid="nav-home">Home</button><button
-              data-testid="nav-fleet" onClick={() => scrollTo("fleet")}>Fleet</button><button
-              data-testid="nav-business" onClick={() => scrollTo("business")}>For Business</button><button data-testid="nav-about">About Us</button><button data-testid="nav-services" onClick={() => scrollTo("services")}>Services</button><button className="nav-store"
-              data-testid="nav-download-app"><img alt="Get it on Google Play" src="/assets/brand/play-badge.png" /></button></div><button className="menu-button"
-            data-testid="mobile-menu-toggle" aria-label="Toggle menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-              className="lucide lucide-menu" aria-hidden="true">
+    <header className="nav-wrap">
+      <nav className="nav container" data-testid="site-navigation">
+        <button
+          className="brand brand-bijliride"
+          data-testid="brand-home"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Bijliride Home"
+        >
+          <span className="brand-text">
+            Bijlirid
+            <span className="brand-leaf-e">
+              e
+              <svg className="brand-leaf-svg" viewBox="0 0 24 24" fill="#22c55e" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-10 4.5S10 14 10 14" />
+              </svg>
+            </span>
+          </span>
+        </button>
+
+        <div className={`nav-links ${mobileOpen ? 'open' : ''}`}>
+          <button
+            className="nav-link active"
+            data-testid="nav-home"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setMobileOpen(false);
+            }}
+          >
+            Home
+          </button>
+          <button
+            className="nav-link"
+            data-testid="nav-business"
+            onClick={() => scrollTo('business')}
+          >
+            For Business
+          </button>
+          <button
+            className="nav-link"
+            data-testid="nav-about"
+            onClick={() => scrollTo('about')}
+          >
+            About Us
+          </button>
+          <button
+            className="nav-link"
+            data-testid="nav-services"
+            onClick={() => scrollTo('services')}
+          >
+            Services
+          </button>
+        </div>
+
+        <div className="nav-right">
+          <button
+            className="nav-store"
+            data-testid="nav-download-app"
+            onClick={() => scrollTo('fleet')}
+            aria-label="Get it on Google Play"
+          >
+            <img alt="GET IT ON Google Play" src="/assets/brand/play-badge.png" />
+          </button>
+          <button
+            className="menu-button"
+            data-testid="mobile-menu-toggle"
+            aria-label="Toggle menu"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 12h16"></path>
               <path d="M4 18h16"></path>
               <path d="M4 6h16"></path>
-            </svg></button>
-        </nav>
-      </header>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
   );
 }

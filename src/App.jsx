@@ -51,7 +51,7 @@ export default function App() {
     <div className="site-shell">
       <Header />
       <main id="top">
-        <Hero selectedModel={selectedModel} onSelectModel={handleSelectModel} />
+        <Hero />
         <Stats />
         <Marquee />
         <Fleet onSelectModel={handleSelectModel} />
