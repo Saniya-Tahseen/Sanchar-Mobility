@@ -26,7 +26,7 @@ export default function FloatingActions() {
         href="https://wa.me/91?text=Hi%20SancharSathi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20EV%20rentals%20and%20services."
         target="_blank"
         rel="noopener noreferrer"
-        className="float-btn float-btn-whatsapp"
+        className="float-btn float-btn-app"
         aria-label="Chat with SancharSathi on WhatsApp"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">

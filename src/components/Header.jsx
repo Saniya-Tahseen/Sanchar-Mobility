@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 
-export default function Header() {
+export default function Header({ currentPage = 'home', onNavigate }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleNav = (page, sectionId = null) => {
+    if (onNavigate) {
+      onNavigate(page, sectionId);
+    } else if (sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     setMobileOpen(false);
   };
 
@@ -15,7 +21,7 @@ export default function Header() {
         <button
           className="brand brand-bijliride"
           data-testid="brand-home"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => handleNav('home')}
           aria-label="Bijliride Home"
         >
           <span className="brand-text">
@@ -31,47 +37,46 @@ export default function Header() {
 
         <div className={`nav-links ${mobileOpen ? 'open' : ''}`}>
           <button
-            className="nav-link active"
+            className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
             data-testid="nav-home"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              setMobileOpen(false);
-            }}
+            onClick={() => handleNav('home')}
           >
             Home
           </button>
           <button
             className="nav-link"
             data-testid="nav-business"
-            onClick={() => scrollTo('business')}
+            onClick={() => handleNav('home', 'business')}
           >
             For Business
           </button>
           <button
             className="nav-link"
             data-testid="nav-about"
-            onClick={() => scrollTo('about')}
+            onClick={() => handleNav('home', 'about')}
           >
             About Us
           </button>
           <button
-            className="nav-link"
+            className={`nav-link ${currentPage === 'services' ? 'active' : ''}`}
             data-testid="nav-services"
-            onClick={() => scrollTo('services')}
+            onClick={() => handleNav('services')}
           >
             Services
           </button>
         </div>
 
         <div className="nav-right">
-          <button
+          <a
+            href="https://play.google.com/store/apps/details?id=com.bijliride"
+            target="_blank"
+            rel="noopener noreferrer"
             className="nav-store"
             data-testid="nav-download-app"
-            onClick={() => scrollTo('fleet')}
             aria-label="Get it on Google Play"
           >
             <img alt="GET IT ON Google Play" src="/assets/brand/play-badge.png" />
-          </button>
+          </a>
           <button
             className="menu-button"
             data-testid="mobile-menu-toggle"

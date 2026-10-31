@@ -2,80 +2,96 @@ import React from 'react';
 
 export default function Fleet({ onSelectModel }) {
   return (
-        <section id="fleet" className="fleet-section container">
-          <div className="section-heading">
-            <div>
-              <div className="eyebrow green">Flagship Electric Fleet</div>
-              <h2>Engineered for Performance.<br /><span style={{ color: 'var(--green)' }}>Designed for the City.</span></h2>
-            </div>
-            <p>Explore SancharSathi's smart electric mobility lineup — built with intelligent battery architecture,
-              certified extended ranges, and zero emissions for modern commuters.</p>
-          </div>
-          <div className="fleet-grid">
-            {/* Green Scooter Card */}
-            <div className="fleet-card" id="cardModelGreen">
-              <span className="fleet-badge badge-green">Smart Urban Commuter</span>
-              <h3>BGauss C12i</h3>
-              <p className="fleet-card-desc">Lightweight, agile, and styled in Foliage Green. Packed with regenerative
-                braking, real-time telemetry, and superior energy efficiency.</p>
-              <div className="fleet-stage">
-                <div className="fleet-pedestal"></div>
-                <img src="bgauss-scooter-green.png" alt="BGauss C12i Foliage Green Electric Scooter" />
-              </div>
-              <div className="fleet-specs">
-                <div className="spec-item"><span className="spec-val">135 km</span><span className="spec-lbl">Range</span></div>
-                <div className="spec-item"><span className="spec-val">75 km/h</span><span className="spec-lbl">Top Speed</span>
-                </div>
-                <div className="spec-item"><span className="spec-val">3.2 kWh</span><span className="spec-lbl">Battery</span></div>
-                <div className="spec-item"><span className="spec-val">3.5 hrs</span><span className="spec-lbl">Fast Charge</span>
-                </div>
-              </div>
-              <div className="fleet-card-actions">
-                <div className="fleet-color-indicator">
-                  <span className="fleet-dot dot-green"></span> Foliage Green
-                </div>
-                <button type="button" className="fleet-select-btn btn-select-green" onClick={() => onSelectModel?.('green')}>
-                  Select Model <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+    <section id="fleet" className="fleet-section container">
+      <div className="section-heading">
+        <div>
+          <div className="eyebrow green">Flagship Electric Fleet</div>
+          <h2>Engineered for Performance.<br /><span style={{ color: 'var(--green)' }}>Designed for the City.</span></h2>
+        </div>
+        <p>Explore SancharSathi's smart electric mobility lineup — built with intelligent battery architecture,
+          certified extended ranges, and zero emissions for modern commuters.</p>
+      </div>
 
-            {/* Red Scooter Card */}
-            <div className="fleet-card card-red" id="cardModelRed">
-              <span className="fleet-badge badge-red">High-Torque Performance</span>
-              <h3>BGauss D15</h3>
-              <p className="fleet-card-desc">Bold and commanding in Crimson Red. Engineered with large 16-inch alloy wheels,
-                high-tensile steel frame, and instant sport acceleration.</p>
-              <div className="fleet-stage">
-                <div className="fleet-pedestal pedestal-red"></div>
-                <img src="bgauss-scooter-red.png" alt="BGauss D15 Crimson Red Electric Scooter" />
+      {/* Flagship Spotlight Showcase Card */}
+      <div className="fleet-card fleet-spotlight-card" id="cardModelMint">
+        <div className="fleet-spotlight-content">
+          <div className="fleet-spotlight-badge-row">
+            <span className="fleet-badge badge-mint">⚡ Flagship Urban Commuter</span>
+            <span className="fleet-edition-tag">Mint Green &amp; White Edition</span>
+          </div>
+
+          <h3 className="fleet-spotlight-title">BGauss C12</h3>
+          <p className="fleet-spotlight-desc">
+            Modern, agile, and styled in refreshing Mint Green &amp; Pearl White with contoured saddle-brown seating. Engineered with high-torque regenerative braking, smart real-time telemetry, and superior energy efficiency for modern commuters.
+          </p>
+
+          <div className="fleet-spotlight-specs">
+            <div className="spotlight-spec-card">
+              <span className="spotlight-spec-icon">⚡</span>
+              <div>
+                <span className="spec-val">135 km</span>
+                <span className="spec-lbl">Certified Range</span>
               </div>
-              <div className="fleet-specs">
-                <div className="spec-item"><span className="spec-val">115 km</span><span className="spec-lbl">Range</span></div>
-                <div className="spec-item"><span className="spec-val">60 km/h</span><span className="spec-lbl">Top Speed</span>
-                </div>
-                <div className="spec-item"><span className="spec-val">3.2 kWh</span><span className="spec-lbl">Battery</span></div>
-                <div className="spec-item"><span className="spec-val">4.0 hrs</span><span className="spec-lbl">Fast Charge</span>
-                </div>
+            </div>
+            <div className="spotlight-spec-card">
+              <span className="spotlight-spec-icon">🚀</span>
+              <div>
+                <span className="spec-val">75 km/h</span>
+                <span className="spec-lbl">Top Speed</span>
               </div>
-              <div className="fleet-card-actions">
-                <div className="fleet-color-indicator">
-                  <span className="fleet-dot dot-red"></span> Crimson Red
-                </div>
-                <button type="button" className="fleet-select-btn btn-select-red" onClick={() => onSelectModel?.('red')}>
-                  Select Model <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </button>
+            </div>
+            <div className="spotlight-spec-card">
+              <span className="spotlight-spec-icon">🔋</span>
+              <div>
+                <span className="spec-val">3.2 kWh</span>
+                <span className="spec-lbl">LFP Battery</span>
+              </div>
+            </div>
+            <div className="spotlight-spec-card">
+              <span className="spotlight-spec-icon">⏱️</span>
+              <div>
+                <span className="spec-val">3.5 hrs</span>
+                <span className="spec-lbl">Fast Charge</span>
               </div>
             </div>
           </div>
-        </section>
+
+          <div className="fleet-spotlight-actions">
+            <div className="fleet-color-indicator">
+              <span className="fleet-dot dot-mint"></span>
+              <span>Mint Green &amp; White</span>
+            </div>
+            <button
+              type="button"
+              className="fleet-select-btn btn-select-mint"
+              onClick={() => onSelectModel?.('mint')}
+            >
+              Select Model
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="fleet-spotlight-visual">
+          <div className="fleet-spotlight-pedestal" aria-hidden="true"></div>
+          <img
+            src="/assets/fleet/bgauss-scooter-mint.png"
+            alt="BGauss C12 Mint Green & White Electric Scooter"
+            className="fleet-spotlight-img"
+          />
+          <div className="fleet-floating-chip chip-left">
+            <span className="chip-dot"></span>
+            <span>Zero Emissions</span>
+          </div>
+          <div className="fleet-floating-chip chip-right">
+            <span>🛡️ IP67 Waterproof</span>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

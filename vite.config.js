@@ -10,6 +10,11 @@ export default defineConfig({
       name: 'serve-static-assets',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
+          // If this is an ES module import request from Vite, let Vite handle it
+          if (req.url.includes('?import') || req.headers.accept?.includes('application/javascript')) {
+            return next();
+          }
+
           const rawUrl = req.url.split('?')[0];
           // Serve /assets/* or /bgauss-scooter-*.png
           if (rawUrl.startsWith('/assets/') || rawUrl.startsWith('/bgauss-scooter-')) {
@@ -43,7 +48,7 @@ export default defineConfig({
           fs.cpSync(srcAssets, destAssets, { recursive: true });
         }
         // Copy root scooter PNGs to dist/
-        ['bgauss-scooter-green.png', 'bgauss-scooter-red.png'].forEach((f) => {
+        ['bgauss-scooter-green.png', 'bgauss-scooter-red.png', 'bgauss-scooter-yellow.png'].forEach((f) => {
           const srcFile = path.resolve(__dirname, f);
           const destFile = path.resolve(__dirname, 'dist', f);
           if (fs.existsSync(srcFile)) {
