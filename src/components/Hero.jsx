@@ -185,7 +185,7 @@ export default function Hero() {
               <path d="M13 3 5 14h6l-1 7 8-11h-6z" />
             </svg>
           </span>
-          Quick, quiet electric ride for everyday trips
+          Quick, quiet electric ride for everyday needs
         </div>
 
         <div className="co c2" ref={co2Ref}>
@@ -195,7 +195,7 @@ export default function Hero() {
               <path d="M14.5 9.5c-.6-.8-1.5-1.1-2.5-1.1-1.4 0-2.4.7-2.4 1.8 0 2.5 5 1.2 5 3.7 0 1.1-1.1 1.9-2.6 1.9-1 0-2-.4-2.6-1.2M12 6.5v1.9m0 7.2v1.9" />
             </svg>
           </span>
-          Switch to electric and save on every ride
+          Ride Smart,Ride Electric !
         </div>
 
         <div className="co c3" ref={co3Ref}>
@@ -204,7 +204,7 @@ export default function Hero() {
               <path d="m12 3 7 17-7-4-7 4z" />
             </svg>
           </span>
-          Smart navigation and a reliable braking system
+          Affordable rides and earn more !
         </div>
 
         {/* Scroll hint indicator */}
@@ -213,11 +213,36 @@ export default function Hero() {
           id="hint"
           ref={hintRef}
           onClick={handleScrollToExplore}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleScrollToExplore();
+            }
+          }}
           role="button"
           tabIndex={0}
           aria-label="Scroll to explore"
         >
-          Scroll to explore<b></b>
+          <span className="hint-label">Scroll to explore</span>
+          <div className="hint-indicator" aria-hidden="true">
+            <span className="hint-line"></span>
+            <svg
+              className="hint-chevron"
+              width="14"
+              height="8"
+              viewBox="0 0 14 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.5 1.5L7 6.5L12.5 1.5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </section>

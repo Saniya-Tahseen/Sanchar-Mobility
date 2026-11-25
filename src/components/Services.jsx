@@ -313,14 +313,12 @@ export default function Services({ onNavigate }) {
                   <div className={`service-btn-icon-box ${isActive ? 'icon-box-active' : ''}`}>
                     {renderIcon(item.iconType)}
                   </div>
-                  {isActive && (
-                    <div className="service-btn-arrow-circle" aria-label="Selected">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="7" y1="7" x2="17" y2="17" />
-                        <polyline points="17 7 17 17 7 17" />
-                      </svg>
-                    </div>
-                  )}
+                  <div className={`service-btn-arrow-circle ${isActive ? 'is-active' : ''}`} aria-label={isActive ? 'Selected' : 'Select Service'}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="7" x2="17" y2="17" />
+                      <polyline points="17 7 17 17 7 17" />
+                    </svg>
+                  </div>
                 </div>
                 <div className="service-btn-text-content">
                   <h3 className="service-btn-title">{item.title}</h3>

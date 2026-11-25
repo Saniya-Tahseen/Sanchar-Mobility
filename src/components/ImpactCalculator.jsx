@@ -1,45 +1,63 @@
 import React, { useState } from 'react';
 
 export default function ImpactCalculator() {
-  const [distance, setDistance] = useState('');
-  const [fuelCost, setFuelCost] = useState('');
-  const [mileage, setMileage] = useState('');
+  const [inputs, setInputs] = useState({
+    distance: '',
+    fuelCost: '',
+    mileage: '',
+  });
+
+  const [results, setResults] = useState({
+    co2: 0,
+    fuel: 0,
+    money: 0,
+  });
+
   const [isCalculated, setIsCalculated] = useState(false);
   const [errors, setErrors] = useState({ distance: false, fuelCost: false, mileage: false });
 
-  // Handle calculate action
+  const handleInputChange = (field, value) => {
+    setInputs((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: false }));
+    }
+  };
+
   const handleCalculate = (e) => {
     if (e) e.preventDefault();
 
-    const dNum = parseFloat(distance);
-    const fNum = parseFloat(fuelCost);
-    const mNum = parseFloat(mileage);
+    const l = parseFloat(inputs.distance) || 0;
+    const u = parseFloat(inputs.fuelCost) || 0;
+    const h = parseFloat(inputs.mileage) || 0;
 
     const newErrors = {
-      distance: !distance || isNaN(dNum) || dNum <= 0,
-      fuelCost: !fuelCost || isNaN(fNum) || fNum <= 0,
-      mileage: !mileage || isNaN(mNum) || mNum <= 0,
+      distance: l <= 0,
+      fuelCost: u <= 0,
+      mileage: h <= 0,
     };
 
     setErrors(newErrors);
 
-    if (newErrors.distance || newErrors.fuelCost || newErrors.mileage) {
+    if (l <= 0 || u <= 0 || h <= 0) {
       setIsCalculated(false);
       return;
     }
 
+    // Exact Bijliride calculation formulas:
+    // f = (distance / mileage) * 30 (monthly fuel saved in litres)
+    // p = f * fuelCost (monthly money saved in ₹)
+    // g = f * 2.3 (monthly CO2 saved in kg)
+    const f = (l / h) * 30;
+    const p = f * u;
+    const g = f * 2.3;
+
+    setResults({
+      co2: Math.round(g),
+      fuel: Math.round(f * 10) / 10,
+      money: Math.round(p),
+    });
+
     setIsCalculated(true);
-  };
-
-  const handleInputChange = (field, value) => {
-    if (field === 'distance') setDistance(value);
-    if (field === 'fuelCost') setFuelCost(value);
-    if (field === 'mileage') setMileage(value);
-
-    // Clear error on edit
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: false }));
-    }
   };
 
   const handleKeyDown = (e) => {
@@ -47,40 +65,6 @@ export default function ImpactCalculator() {
       handleCalculate(e);
     }
   };
-
-  // Live parsed numbers
-  const dVal = parseFloat(distance) || 0;
-  const fVal = parseFloat(fuelCost) || 0;
-  const mVal = parseFloat(mileage) || 0;
-
-  const isValid = isCalculated && dVal > 0 && fVal > 0 && mVal > 0;
-
-  // Monthly calculations (30 days/month)
-  const monthlyKm = isValid ? dVal * 30 : 0;
-  const fuelSavedLitres = isValid ? monthlyKm / mVal : 0;
-  const co2SavedKg = isValid ? fuelSavedLitres * 2.31 : 0;
-
-  // Net financial savings (petrol saved minus EV charging cost ~0.25/km)
-  const petrolCost = isValid ? fuelSavedLitres * fVal : 0;
-  const evChargingCost = isValid ? monthlyKm * 0.25 : 0;
-  const netMoneySaved = isValid ? Math.max(0, petrolCost - evChargingCost) : 0;
-
-  // Formatted output strings
-  const displayCo2 = !isValid
-    ? 'Kg 0000'
-    : 'Kg ' + (co2SavedKg >= 100
-        ? Math.round(co2SavedKg).toLocaleString('en-IN')
-        : (co2SavedKg % 1 === 0 ? co2SavedKg : co2SavedKg.toFixed(1)));
-
-  const displayFuel = !isValid
-    ? 'L 0000'
-    : 'L ' + (fuelSavedLitres >= 100
-        ? Math.round(fuelSavedLitres).toLocaleString('en-IN')
-        : (fuelSavedLitres % 1 === 0 ? fuelSavedLitres : fuelSavedLitres.toFixed(1)));
-
-  const displayMoney = !isValid
-    ? '₹ 0000'
-    : '₹ ' + Math.round(netMoneySaved).toLocaleString('en-IN');
 
   return (
     <section id="impact" className="impact-section" data-testid="impact-section">
@@ -103,12 +87,13 @@ export default function ImpactCalculator() {
                 <input
                   type="number"
                   id="impact-distance"
+                  name="distance"
                   className={`impact-input ${errors.distance ? 'is-invalid' : ''}`}
                   placeholder="Enter distance"
-                  value={distance}
+                  value={inputs.distance}
                   onChange={(e) => handleInputChange('distance', e.target.value)}
                   onKeyDown={handleKeyDown}
-                  min="1"
+                  min="0"
                   step="any"
                 />
               </div>
@@ -118,12 +103,13 @@ export default function ImpactCalculator() {
                 <input
                   type="number"
                   id="impact-fuel-cost"
+                  name="fuelCost"
                   className={`impact-input ${errors.fuelCost ? 'is-invalid' : ''}`}
                   placeholder="Enter cost"
-                  value={fuelCost}
+                  value={inputs.fuelCost}
                   onChange={(e) => handleInputChange('fuelCost', e.target.value)}
                   onKeyDown={handleKeyDown}
-                  min="1"
+                  min="0"
                   step="any"
                 />
               </div>
@@ -133,12 +119,13 @@ export default function ImpactCalculator() {
                 <input
                   type="number"
                   id="impact-mileage"
+                  name="mileage"
                   className={`impact-input ${errors.mileage ? 'is-invalid' : ''}`}
                   placeholder="Enter mileage"
-                  value={mileage}
+                  value={inputs.mileage}
                   onChange={(e) => handleInputChange('mileage', e.target.value)}
                   onKeyDown={handleKeyDown}
-                  min="1"
+                  min="0"
                   step="any"
                 />
               </div>
@@ -161,9 +148,9 @@ export default function ImpactCalculator() {
               <div className="impact-res-box">
                 <span
                   id="impact-co2-val"
-                  className={`impact-res-value ${isValid ? 'active' : ''}`}
+                  className={`impact-res-value ${isCalculated ? 'active' : ''}`}
                 >
-                  {displayCo2}
+                  {isCalculated ? `${results.co2} Kg` : 'Kg 0000'}
                 </span>
               </div>
             </div>
@@ -173,9 +160,9 @@ export default function ImpactCalculator() {
               <div className="impact-res-box">
                 <span
                   id="impact-fuel-val"
-                  className={`impact-res-value ${isValid ? 'active' : ''}`}
+                  className={`impact-res-value ${isCalculated ? 'active' : ''}`}
                 >
-                  {displayFuel}
+                  {isCalculated ? `${results.fuel} L` : 'L 0000'}
                 </span>
               </div>
             </div>
@@ -185,9 +172,9 @@ export default function ImpactCalculator() {
               <div className="impact-res-box">
                 <span
                   id="impact-money-val"
-                  className={`impact-res-value ${isValid ? 'active' : ''}`}
+                  className={`impact-res-value ${isCalculated ? 'active' : ''}`}
                 >
-                  {displayMoney}
+                  {isCalculated ? `₹ ${results.money.toLocaleString('en-IN')}` : '₹ 0000'}
                 </span>
               </div>
             </div>

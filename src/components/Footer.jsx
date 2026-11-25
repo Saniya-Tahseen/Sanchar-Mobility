@@ -19,7 +19,7 @@ export default function Footer({ onNavigate }) {
           className="brand"
           data-testid="footer-brand"
           onClick={() => handleNav('home')}
-          aria-label="SancharSathi Home"
+          aria-label="Sanchari Home"
         >
           <span className="brand-mark">
             <svg
@@ -38,12 +38,12 @@ export default function Footer({ onNavigate }) {
               <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
             </svg>
           </span>
-          Sanchar<span>Sathi</span>
+          Sanchari<span></span>
         </button>
         <p>Electrifying every mile.</p>
         <div className="footer-links">
           <button data-testid="footer-why" onClick={() => handleNav('home', 'why-us')}>
-            Why SancharSathi
+            Why Sanchari
           </button>
           <button data-testid="footer-services" onClick={() => handleNav('services')}>
             Services
@@ -52,7 +52,7 @@ export default function Footer({ onNavigate }) {
             Contact
           </button>
         </div>
-        <small>© 2026 SancharSathi. Ride clean.</small>
+        <small>© 2026 Sanchari. Ride clean.</small>
       </div>
     </footer>
   );

@@ -19,20 +19,16 @@ export default function Header({ currentPage = 'home', onNavigate }) {
     <header className="nav-wrap">
       <nav className="nav container" data-testid="site-navigation">
         <button
-          className="brand brand-bijliride"
-          data-testid="brand-home"
+          className="brand brand-nav-logo"
+          data-testid="nav-brand"
           onClick={() => handleNav('home')}
-          aria-label="Bijliride Home"
+          aria-label="Sanchari - Ride Smart. Ride Electric."
         >
-          <span className="brand-text">
-            Bijlirid
-            <span className="brand-leaf-e">
-              e
-              <svg className="brand-leaf-svg" viewBox="0 0 24 24" fill="#22c55e" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-10 4.5S10 14 10 14" />
-              </svg>
-            </span>
-          </span>
+          <img
+            src="/assets/brand/sanchari-logo.png"
+            alt="Sanchari - Ride Smart. Ride Electric."
+            className="brand-logo-img"
+          />
         </button>
 
         <div className={`nav-links ${mobileOpen ? 'open' : ''}`}>

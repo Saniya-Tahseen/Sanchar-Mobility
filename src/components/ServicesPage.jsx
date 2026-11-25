@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Advantage from './Advantage';
 import Services from './Services';
 import Business from './Business';
 import Contact from './Contact';
@@ -122,18 +123,7 @@ export default function ServicesPage({ onNavigate }) {
       </section>
 
       {/* 2. The Bijliride Advantage Section (Full-Width Seamless Background) */}
-      <section id="advantage" className="advantage-section" data-testid="advantage-section">
-        <div className="advantage-container">
-          <div className="advantage-seamless-wrap">
-            <img
-              src="/assets/services/bijliride-advantage-transparent.png"
-              alt="The Bijliride Advantage - Flexible EV rentals with battery support, service assistance, and smart mobility access, Built to keep riders and businesses moving"
-              className="advantage-seamless-img"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </section>
+      <Advantage />
 
       {/* 3. Services Ecosystem Grid Section */}
       <div id="services-grid">

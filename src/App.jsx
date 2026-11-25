@@ -6,7 +6,8 @@ import Fleet from './components/Fleet';
 import WhyUs from './components/WhyUs';
 import Partners from './components/Partners';
 import Steps from './components/Steps';
-import HomeServices from './components/HomeServices';
+import Advantage from './components/Advantage';
+import Services from './components/Services';
 import ServicesPage from './components/ServicesPage';
 import Business from './components/Business';
 import ChargingPlatform from './components/ChargingPlatform';
@@ -104,7 +105,8 @@ export default function App() {
             <WhyUs />
             <Partners />
             <Steps />
-            <HomeServices onNavigate={handleNavigate} />
+            <Advantage />
+            <Services onNavigate={handleNavigate} />
             <Business />
             <ChargingPlatform />
             <ImpactCalculator />
